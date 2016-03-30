@@ -1,4 +1,4 @@
-from numpy import linspace,sqrt,exp,tanh,where,cosh,pi,log,array
+from numpy import linspace,sqrt,exp,tanh,where,cosh,pi,log,array,isscalar
 from matplotlib.pyplot import plot,show
 import sys
 
@@ -125,7 +125,7 @@ class equilibrium():
         # stuff below will modify the array that is being passed on
         # exit!!!!!!!
         # therefore, check fo the type of xstart explicitely:
-        if type(xstart)!=float: sys.exit('xstart type is not float. Exiting...')
+        if not isscalar(xstart): sys.exit('xstart type is not float. Exiting...')
         xguess = xstart
         while self.y(xguess-Dx,xstart)[1]<=ymax:
             xguess-=Dx
