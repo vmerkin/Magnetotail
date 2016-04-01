@@ -39,7 +39,8 @@ class equilibrium():
         x = array(x)
         ind = (x<=x1)
         if ind.any():
-            return [x[ind],sqrt( exp(2*(self.e1*(self.g(x1)-self.g(x[ind]))))-1. )]
+#            return [x[ind],sqrt( exp(2*self.e1*(self.g(x1)-self.g(x[ind])))-1. )]
+            return [x[ind],sqrt( (self.beta(x1)/self.beta(x[ind]))**2-1. )]
         else:
             sys.exit('All points where y is requested are tailward of x1.')
 
