@@ -65,6 +65,32 @@ class equilibrium():
         I = self.I(x1,f)
         return I[0],-self.gp(x1)/self.e1/self.Cd(x1)[1]*I[1]
 
+    def Q(self,x1):
+        f1 = lambda x: self.gpp(x)/self.gp(x)**3
+        f2 = lambda x: 1/self.gp(x)
+
+        xx1,I1 = self.I(x1,f1)
+        xx2,I2 = self.I(x1,f2)
+
+        if not all(xx1==xx2): 
+            sys.exit('Error in equilibrium Q function: coordinate arrays returned from two I integrals are not the same.')
+
+        # Note, the y coordiante coming out of here should be
+        # identical to the one used inside the I integral, i.e., it
+        # should be a uniform linspace array.  We could, in pricinpe,
+        # pass the y array from the I integral as an output, but for
+        # backward compatibiility, I did not want to change the
+        # function calling sequence. For this reason, I'm just
+        # calculating the y array here.
+        xy,y = self.y(xx1,x1)
+
+        if not all(xx1==xy):
+            sys.exit('Error in equilibrium Q function: coordinate arrays returned from the I integral and the y function are not the same.')
+
+        F1 = -1./self.e1*I1/I2
+        F2 = self.beta(x1)/self.beta(xx1)/self.gp(xx1)/y/(y**2+1)/I2
+        return(xx1,1+F1+F2)
+
     def I(self,x1,f,N=1.e6,tol=1.e-10,small=1.e-8):
         import scipy.integrate as integrate
         from scipy.interpolate import interp1d
