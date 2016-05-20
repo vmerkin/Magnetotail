@@ -88,7 +88,7 @@ class equilibrium():
             sys.exit('Error in equilibrium Q function: coordinate arrays returned from the I integral and the y function are not the same.')
 
         F1 = -1./self.e1*I1/I2
-        F2 = self.beta(x1)/self.beta(xx1)/self.gp(xx1)/y/(y**2+1)/I2
+        F2 = 2./pi*self.beta(x1)/self.beta(xx1)/self.gp(xx1)/y/(y**2+1)/I2
         return(xx1,1+F1+F2)
 
     def I(self,x1,f,N=1.e6,tol=1.e-10,small=1.e-8):
