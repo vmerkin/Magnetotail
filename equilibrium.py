@@ -63,7 +63,7 @@ class equilibrium():
         # The Bici integral
         f = lambda x: self.gpp(x)/self.gp(x)**3
         I = self.I(x1,f)
-        return I[0],-self.gp(x1)/self.e1/self.Cd(x1)[1][-1]*I[1]
+        return I[0],-self.gp(x1)/self.e1/self.Cd(x1)[1]*I[1]
 
     def I(self,x1,f,N=1.e6,tol=1.e-10,small=1.e-8):
         import scipy.integrate as integrate
